@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+    <script>
+        let socket;
+
+        function connectWebSocket() {
+            socket = new WebSocket('ws://localhost:8001/ws/scene-change/');
+
+            socket.onmessage = function(event) {
+                //const message = JSON.parse(event.data);
+                //console.log("Received:", message);
+                console.log("Received:", event.data);
+            };
+        }
+
+        function sendMessage() {
+            const message = {
+                roomCode: 'exampleRoom',
+                messageType: 'trigger',
+                content: 'Butona tıklandı!'
+            };
+            //socket.send(JSON.stringify(message));
+            socket.send('aaaa');
+        }
+
+        window.onload = connectWebSocket;
+    </script>
+</head>
+<body>
+    <button onclick="sendMessage()">Mesaj Gönder</button>
+</body>
+</html>

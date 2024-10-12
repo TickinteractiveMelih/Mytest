@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tüm Unity Client'lara Mesaj Gönder</title>
+</head>
+<body>
+    <h1>Tüm Unity Client'lara Mesaj Gönder</h1>
+    <input id="messageInput" type="text" placeholder="Mesajınızı yazın..." />
+    <button id="sendButton">Gönder</button>
+
+    <script>
+        const sendButton = document.getElementById('sendButton');
+        const messageInput = document.getElementById('messageInput');
+
+        sendButton.onclick = function() {
+            const message = messageInput.value;
+
+            if (message) {
+                fetch(`/send_message_to_all/?message=${message}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.status);  // Gönderim durumunu kontrol edin
+                    });
+            }
+        };
+    </script>
+</body>
+</html>
